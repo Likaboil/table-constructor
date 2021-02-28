@@ -1,6 +1,15 @@
 @import './variables';
 
+* {
+  box-sizing: border-box;
+}
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: $app-background;
+}
+
+
+.page-container {
+  margin: 0 auto;
+  width: 700px;
 }
