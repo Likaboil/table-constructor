@@ -1,0 +1,43 @@
+@import '../../styles/variables';
+
+.table{
+  width: 100%;
+  table-layout: fixed;
+  color: $table-text;
+  border-collapse: collapse;
+  background-color: $table-backround;
+
+  &-column th  {
+    background-color: $table-column-background;
+    opacity: 0.9;
+
+    &:hover {
+      opacity: 0.6;
+    }
+
+    &:active {
+      opacity: 1;
+    }
+  }
+
+  th:not(:first-child), td:not(:first-child)  {
+    border-left: $table-border;
+  }
+
+  th:nth-child(1), td:nth-child(1) {
+    width: 20%;
+  }
+
+   th:nth-child(2), td:nth-child(2) {
+    width: 80%;
+  }
+
+  &-row tr {
+    border-bottom: $table-border;
+  }
+
+  tr th, tr td {
+    padding: 0.5rem;
+    text-align: left;
+  }
+}
