@@ -2,23 +2,11 @@ import React from 'react';
 import './app.scss';
 
 import TableScreen from '../table-screen';
+import MockData from '../../mock-data';
 
 const App = () => {
 
-  const items =  [
-    {
-      id: 1,
-      text: 'mock-item'},
-    {
-      id: 2,
-      text: 'mock-item'},
-    {
-      id: 3,
-      text: 'mock-item'},
-    {
-      id: 4,
-      text: 'mock-item'}
-  ];
+  const items = MockData;
 
   return (
     <div className="page-container">
