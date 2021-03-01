@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './table-screen.scss';
 
 import Table from '../table';
+import SearchPanel from '../search-panel';
 
 export default class TableScreen extends Component {
 
@@ -9,10 +10,11 @@ export default class TableScreen extends Component {
     items: this.props.items,
     sortType: 'id',
     sortReverse: false,
+    searchLabel: '',
   }
 
   // по клику получаем тип стобца для сортировки по возрастанию
-  // в state устанавливаем полученный тип и значение переменной для сортировки по убыванию
+  // в state устанавливаем полученный тип и значение доп.свойства для сортировки по убыванию
   onSortColumn = (sortType) => {
     const { sortReverse } = this.state;
 
@@ -44,16 +46,35 @@ export default class TableScreen extends Component {
     };
   }
 
-  render() {
+  // по клику получаем значение из строки поиска
+  onSearchChange = (searchLabel) =>  this.setState({ searchLabel });
 
-    const { items, sortType, sortReverse } = this.state;
+  // поиск строки
+  searchRow = (items, searchLabel ) => {
+
+    // по умолчанию выводятся все данные
+    if (searchLabel.length === 0) {
+      return items;
+    };
+
+    return items.filter((item) => {
+      return item.text.toLowerCase().indexOf(searchLabel.toLowerCase()) > -1;
+    });
+  }
+
+  render() {
+    const { items, sortType, sortReverse, searchLabel } = this.state;
 
     // отсортированные данные
     const sortItems = this.sortTableColumn(items, sortType, sortReverse);
 
+    //данные после поиска
+    const visibleItems = this.searchRow(sortItems, searchLabel)
+
     return (
       <div className="table-container">
-        <Table items={sortItems}
+        <SearchPanel onSearchChange={this.onSearchChange} />
+        <Table items={visibleItems}
           onSortColumn={this.onSortColumn}
         />
       </div>
