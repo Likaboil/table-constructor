@@ -7,45 +7,55 @@ export default class TableScreen extends Component {
 
   state = {
     items: this.props.items,
-    sort: 'id',
+    sortType: 'id',
     sortReverse: false,
   }
 
+  // по клику получаем тип стобца для сортировки по возрастанию
+  // в state устанавливаем полученный тип и значение переменной для сортировки по убыванию
   onSortColumn = (sortType) => {
-
-    const { items, sort, sortReverse } = this.state;
-
-    if (sortType !== sort) {
-      return  this.setState(
-        {
-          items: items.sort(this.sortColumn(sortType, sortReverse)),
-          sortReverse: !sortReverse,
-        });
-    }
+    const { sortReverse } = this.state;
 
     return this.setState(
       {
-        items: items.sort(this.sortColumn(sortType, sortReverse)),
-        sortReverse: !sortReverse,
+        sortType: sortType,
+        sortReverse: !sortReverse
       });
   }
 
+  // доп.функция для сортировки с учетом направления сортировки
   sortColumn = (sortType, sortReverse) => {
+    if (sortReverse) {
+      return (a, b) => a[sortType]  < b[sortType] ? 1 : -1;
+    }
 
-      if (sortReverse) {
-        return (a, b) => a[sortType]  < b[sortType] ? 1 : -1;
-      }
+    return (a, b) => a[sortType]  > b[sortType] ? 1 : -1;
+  }
 
-      return (a, b) => a[sortType]  > b[sortType] ? 1 : -1;
+  // сортировка данных на основе типа столбца и направления сортировки
+  sortTableColumn = (items, sortType, sortReverse) => {
+    switch(sortType) {
+      case 'id':
+      return  items.sort(this.sortColumn(sortType, sortReverse));
+      case 'text':
+      return items.sort(this.sortColumn(sortType, sortReverse));
+      default:
+        return items;
+    };
   }
 
   render() {
 
-    const { items } = this.state;
+    const { items, sortType, sortReverse } = this.state;
+
+    // отсортированные данные
+    const sortItems = this.sortTableColumn(items, sortType, sortReverse);
 
     return (
       <div className="table-container">
-        <Table items={items} onSortColumn={this.onSortColumn}/>
+        <Table items={sortItems}
+          onSortColumn={this.onSortColumn}
+        />
       </div>
     );
   }
