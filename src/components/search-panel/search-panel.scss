@@ -1,0 +1,24 @@
+@import '../../styles/variables';
+
+.search-panel {
+  margin: 1rem 0;
+  padding: 5px;
+  align-self: flex-end;
+
+  font-size: 16px;
+  color: $search-text;
+
+  border: none;
+  border-radius: 5px;
+  background-color: $search-backround;
+  outline: none;
+  opacity: 0.6;
+
+  &:hover {
+     opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 1;
+  }
+}
