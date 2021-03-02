@@ -1,7 +1,7 @@
 import React from 'react';
 import './table.scss';
 
-const Table = ( { items, onSortColumn } ) => {
+const Table = ( { items, onColumnClick } ) => {
 
   const sortType = {
     id: 'id',
@@ -22,8 +22,8 @@ const Table = ( { items, onSortColumn } ) => {
     <table className="table">
       <thead className="table-column">
         <tr>
-          <th onClick={() => onSortColumn(sortType.id)}>#</th>
-          <th onClick={() => onSortColumn(sortType.description)}>Description</th>
+          <th onClick={() => onColumnClick(sortType.id)}>#</th>
+          <th onClick={() => onColumnClick(sortType.description)}>Description</th>
         </tr>
       </thead>
       <tbody className="table-row">

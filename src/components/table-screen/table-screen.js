@@ -18,7 +18,7 @@ export default class TableScreen extends Component {
 
   // по клику получаем тип стобца для сортировки по возрастанию
   // в state устанавливаем полученный тип и значение доп.свойства для сортировки по убыванию
-  onSortColumn = (sortType) => {
+  _handleColumnClick = (sortType) => {
     const { sortReverse } = this.state;
 
     return this.setState(
@@ -171,7 +171,7 @@ export default class TableScreen extends Component {
       <div className="table-container">
         <SearchPanel onSearchChange={this.onSearchChange} />
         <Table items={visibleItems}
-          onSortColumn={this.onSortColumn}
+          onColumnClick={this._handleColumnClick}
         />
         <Pagination
           btns={visibleBtns}
