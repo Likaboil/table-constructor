@@ -50,7 +50,7 @@ export default class TableScreen extends Component {
   }
 
   // по клику получаем значение из строки поиска
-  onSearchChange = (searchLabel) =>  this.setState({ searchLabel });
+  _handleInputChange = (searchLabel) =>  this.setState({ searchLabel });
 
   // поиск строки
   searchRow = (items, searchLabel ) => {
@@ -169,7 +169,7 @@ export default class TableScreen extends Component {
 
     return (
       <div className="table-container">
-        <SearchPanel onSearchChange={this.onSearchChange} />
+        <SearchPanel onInputChange={this._handleInputChange} />
         <Table items={visibleItems}
           onColumnClick={this._handleColumnClick}
         />

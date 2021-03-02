@@ -7,11 +7,11 @@ export default class SearchPanel extends Component {
     label: ''
   }
 
-  onLabelChange = (evt) => {
+  onInputChange = (evt) => {
     const label = evt.target.value
 
     this.setState({ label });
-    this.props.onSearchChange(label);
+    this.props.onInputChange(label);
   }
 
   render() {
@@ -21,7 +21,7 @@ export default class SearchPanel extends Component {
               placeholder="search"
               type="text"
               value={this.state.label}
-              onChange={this.onLabelChange}
+              onChange={this.onInputChange}
             />
   }
 };
