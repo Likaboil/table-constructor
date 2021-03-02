@@ -1,7 +1,7 @@
 import React from 'react';
 import './pagination.scss';
 
-const Pagination = ({ btns, btnActive, onBtnActive }) => {
+const Pagination = ({ btns, btnActive, onBtnClick }) => {
 
   const renderBtn = btns.map((btn)=> {
     const { id, name } = btn;
@@ -13,17 +13,18 @@ const Pagination = ({ btns, btnActive, onBtnActive }) => {
       <button  className={btnClassName}
         key={id}
         type="button"
-        onClick={() => onBtnActive(id)}
+        onClick={() => onBtnClick(id)}
       >
         {name}
-      </button>);
-    });
+      </button>
+      );
+  });
 
   return (
     <nav className="table-nav">
       {renderBtn}
     </nav>
-  )
+  );
 };
 
 export default Pagination;

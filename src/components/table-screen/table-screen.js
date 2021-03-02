@@ -14,8 +14,6 @@ export default class TableScreen extends Component {
     searchLabel: '',
     pageActive: 1,
     pageLimit: 50,
-    idxStart: 0,
-    idxEnd: 49,
   }
 
   // по клику получаем тип стобца для сортировки по возрастанию
@@ -67,20 +65,20 @@ export default class TableScreen extends Component {
     });
   }
 
-  // получение номера активной страницы
-  onBtnActive = (id) => this.setState({ pageActive: id })
-
   // создание массива кнопок
   createBtns = () => {
     const { items, pageLimit } = this.state;
 
+    // вычисление количеств кнопок
     const btnCount = Math.ceil(items.length/pageLimit);
+
+    // цикл для создания массива объектов для кнопок
     const btns = [];
 
-    for (let i = 1; i <= btnCount; i++) {
+    for (let i = 0; i <= btnCount-1; i++) {
       const newBtn = {
-        id: i,
-        name: i
+        id: i+1,
+        name: i+1
       };
 
       btns.push(newBtn);
@@ -89,7 +87,10 @@ export default class TableScreen extends Component {
     return btns;
   }
 
-  // ограничивает количество строк на одной странице - 50
+  // получение номера активной страницы
+  _handleBtnClick = (id) => this.setState({ pageActive: id })
+
+  // ограничение количества строк на одной странице
   limitRow = (items) => {
     const { pageLimit, pageActive } = this.state;
 
@@ -100,9 +101,10 @@ export default class TableScreen extends Component {
   }
 
   render() {
-    const { items, sortType, sortReverse, searchLabel, pageActive} = this.state;
 
-    const btn = this.createBtns();
+    const { items, sortType, sortReverse, searchLabel, pageActive } = this.state;
+
+    const btns = this.createBtns();
 
     // отсортированные данные
     const sortItems = this.sortTableColumn(items, sortType, sortReverse);
@@ -120,9 +122,10 @@ export default class TableScreen extends Component {
           onSortColumn={this.onSortColumn}
         />
         <Pagination
-          btns={btn}
+          btns={btns}
           btnActive={pageActive}
-          onBtnActive={this.onBtnActive} />
+          onBtnClick={this._handleBtnClick}
+        />
       </div>
     );
   }
