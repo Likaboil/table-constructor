@@ -88,7 +88,57 @@ export default class TableScreen extends Component {
   }
 
   // получение номера активной страницы
-  _handleBtnClick = (id) => this.setState({ pageActive: id })
+  _handleBtnClick = (id) => {
+
+    const { pageActive } = this.state;
+
+    const pageActiveChange = (id === 'next') ? pageActive + 1:
+                            (id === 'prev') ? pageActive - 1:
+                            id;
+    return this.setState({
+      pageActive: pageActiveChange
+    });
+  }
+
+  // вывод кнопок под таблицей и навигацией
+  visibleBtns = (btns) => {
+
+    const { pageActive } = this.state;
+
+    const prevBtn = {
+      id: 'prev',
+      name: 'prev'
+    };
+
+    const nextBtn = {
+      id: 'next',
+      name: 'next'
+    };
+
+    // начало и конец отображаемых кнопок
+    const startIdx = pageActive - 1;
+    const endIdx = pageActive + 3;
+
+    const visibleBtns = btns.slice(startIdx, endIdx);
+
+    // переменные для определения текущего номера страницы и изменения положения активной кнопки
+    const hasNextBtn = pageActive === 1;
+    const hasPrevBtn = pageActive >= (btns.length - 2) && pageActive <= btns.length;
+    const hasPrevandNextBtn = pageActive < (btns.length - 2)
+
+    // определение текущего номера страницы и вставка кнопок навигации
+    if (hasNextBtn) {
+      return btns = [...visibleBtns, nextBtn]
+    };
+
+    if (hasPrevBtn)  {
+      return btns = [prevBtn, ...visibleBtns]
+    };
+
+    if (hasPrevandNextBtn) {
+      return btns= [prevBtn, ...visibleBtns, nextBtn]
+    };
+  }
 
   // ограничение количества строк на одной странице
   limitRow = (items) => {
@@ -104,7 +154,9 @@ export default class TableScreen extends Component {
 
     const { items, sortType, sortReverse, searchLabel, pageActive } = this.state;
 
+    // кнопки пагинации
     const btns = this.createBtns();
+    const visibleBtns = this.visibleBtns(btns);
 
     // отсортированные данные
     const sortItems = this.sortTableColumn(items, sortType, sortReverse);
@@ -122,7 +174,7 @@ export default class TableScreen extends Component {
           onSortColumn={this.onSortColumn}
         />
         <Pagination
-          btns={btns}
+          btns={visibleBtns}
           btnActive={pageActive}
           onBtnClick={this._handleBtnClick}
         />

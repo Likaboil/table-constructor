@@ -6,8 +6,15 @@ const Pagination = ({ btns, btnActive, onBtnClick }) => {
   const renderBtn = btns.map((btn)=> {
     const { id, name } = btn;
     const isActive = btn.id === btnActive;
+    const isNextBtn = btn.name === 'next';
+    const isPrevBtn  = btn.name === 'prev';
 
-    const btnClassName = `nav-btn ${(isActive ? `nav-btn-active` : ``)}`;
+    const btnClassName = `nav-btn ${(
+      isActive ? `nav-btn-active` :
+      isPrevBtn ? `nav-btn-prev`:
+      isNextBtn ? `nav-btn-next` :
+      ``
+    )}`;
 
     return (
       <button  className={btnClassName}
