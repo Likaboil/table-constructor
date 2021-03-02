@@ -1,0 +1,44 @@
+@import '../../styles/variables';
+
+.table-nav {
+  padding: 2rem 0;
+}
+
+.nav-btn {
+  padding: 0 5px;
+  margin: 0 5px;
+  width: 45px;
+  height: 30px;
+
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 28px;
+  color: $btn-text;
+  text-align: center;
+  vertical-align: middle;
+
+  background-color: $btn-background;
+  border: 2px solid $btn-border;
+  border-radius: 5px;
+  outline: none;
+
+  &:hover {
+    background-color: $btn-hover;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+
+  &-active {
+    background-color: $btn-active;
+  }
+
+  &-prev {
+  width: 60px;
+  }
+
+  &-next {
+    width: 60px
+  }
+}
