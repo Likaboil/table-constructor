@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+Учебный проект "Компонент Таблица"
+==============================
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Описание
+-----------------------------------
+React-компонент для создания страниц на основе входящих данных
 
-## Available Scripts
+Использование
+-----------------------------------
 
-In the project directory, you can run:
+Данные в таблицу поступают и рисуются моментально без задержек по 50 строк на каждую страницу.
 
-### `npm start`
+Изначально сортировка идет по номеру строки. Чтобы изменить на сортироку по убыванию номера, нажмите на заголовок столбца - #.
+Для сортировки строк в алфавитном порядке нажмите на заголовок столбца - Description.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Повторное нажатие сортирует нужный столбец по убыванию.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Для просмотра данных используйте кнопки под таблицей. Можно использовать кнопки "Prev" и "Next" для навигации. Передвижение идет по одной странице и активная страница всегда выделяется цветом.
 
-### `npm test`
+Для поиска по строкам воспользуйтесь панелью поиска над таблицей. Начинайте вводить нужное вам значиние и таблица отфильтрует подходящие строки автоматически.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+О проекте
+-----------------------------------
 
-### `npm run build`
+Этот проект предназначался для отработки и укреплению  знаний по базовому React.
+Целеноправленно не использовались React-hooks и методы жизненного цикла.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Основной компонент, где сосредоточена логика - Table-screen. Все необходимые свойства закреплены в state. Методы компонента передают  изменения в state. Остальные компоненты делают рендер по полученным данным и передают callback об активных элементых или необходимости изменений.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Основная цель - пагинация страниц таблицы. Mock-данные содержат чуть более 300 строк, но все рассчитано и на большие объемы.
+Замените данные на любые другие в файле mock.js и проверьте отображение вашей таблицы.
+Здесь нет статуса загрузки и эмуляции сервера, эти штуки можно посмотреть в других проектах.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Структура
+-----------------------------------
+* public
+  favicon и начальный html-шаблон
 
-### `npm run eject`
+* src
+    * components
+      * App - Получает данные из mock-data и передает в компонент Table. В теории может получать откуда угодно.
+      * Pagination - view кнопок навигации по таблице и обработка активных кнопок
+      * Search-panel - view поля поиска по таблице и обработка состояния поля.
+      * Table - view таблицы и обработка для сортировки столбцов.
+      * Table-screen - получает данные от App и передает их во вью компонента.
+          Логику сортировки, поиска и работы кнопок.
+    * mock-data
+    * styles
+        scss-компоненты для стилей.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Инструменты
+-----------------------------------
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* React(базовая настройка create-react-app)
+* HTML 5
+* Scss
+* JavaScript ES2015+
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Автор
+-----------------------------------
 
-## Learn More
+[Liliya Sagitova](https://github.com/Likaboil)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[Telegram](https://t.me/likaboil)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<a href="mailto:guverboil@gmail.com">guverboil@gmail.com</a>
 
-### Code Splitting
+Project setup
+-----------------------------------
+Для установки вам понадобятся node.js v12.18.3+, npm v.6.14.8+.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Скачайте проект и запустите в консоли команды
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+$ npm install
+$ npm start
+```
